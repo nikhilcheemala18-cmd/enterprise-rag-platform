@@ -3,3 +3,6 @@ pypdf==6.15.0
 python-docx==1.2.0
 openpyxl==3.1.5
 pdfplumber==0.11.10
+sqlalchemy==2.0.52
+psycopg[binary]==3.3.4
+pgvector==0.5.0
