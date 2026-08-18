@@ -13,9 +13,13 @@ def embed_query(provider: EmbeddingProvider, query: str) -> list[float]:
     what guarantees that; this function does not do anything provider-
     specific itself.
 
+    Passes is_query=True through to the provider so that a provider with
+    an asymmetric query/document convention (e.g. BGE's query instruction
+    prefix) applies it correctly; a provider without one just ignores it.
+
     The resulting vector is intended for
     RetrievalRequest(query_embedding=...) -> VectorRetriever ->
     HybridSearchService. This module does not import the retrieval
     layer -- constructing the request is left to the caller.
     """
-    return provider.embed_text(query)
+    return provider.embed_text(query, is_query=True)

@@ -104,13 +104,13 @@ class TestDimensionValidation(unittest.TestCase):
         """Deliberately returns the wrong dimension to prove the base
         class's validation catches it."""
 
-        def _embed_texts(self, texts: list[str]) -> list[list[float]]:
+        def _embed_texts(self, texts: list[str], is_query: bool) -> list[list[float]]:
             return [[0.0] * (self.config.dimension + 1) for _ in texts]
 
     class MiscountingProvider(EmbeddingProvider):
         """Deliberately returns the wrong number of vectors."""
 
-        def _embed_texts(self, texts: list[str]) -> list[list[float]]:
+        def _embed_texts(self, texts: list[str], is_query: bool) -> list[list[float]]:
             return [[0.0] * self.config.dimension for _ in texts[:-1]] if texts else []
 
     def test_dimension_mismatch_raises(self):

@@ -22,7 +22,8 @@ class DeterministicTestEmbeddingProvider(EmbeddingProvider):
     that data flows correctly through the pipeline.
     """
 
-    def _embed_texts(self, texts: list[str]) -> list[list[float]]:
+    def _embed_texts(self, texts: list[str], is_query: bool) -> list[list[float]]:
+        # no asymmetric query/document convention -- is_query is ignored.
         return [self._hash_to_vector(text) for text in texts]
 
     def _hash_to_vector(self, text: str) -> list[float]:
