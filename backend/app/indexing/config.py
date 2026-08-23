@@ -1,6 +1,16 @@
 import os
+from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field
+
+# Loads backend/.env into the process environment (if the file exists;
+# a no-op otherwise, e.g. in production where real env vars are injected
+# by the platform). Does not override variables already set in the
+# environment -- that's python-dotenv's default. Runs once, at import
+# time of this module, which is always before any call to
+# DatabaseConfig.from_env() below.
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 
 class DatabaseConfig(BaseModel):

@@ -30,6 +30,11 @@ import unittest
 
 from sqlalchemy import MetaData
 
+import app.indexing.config  # noqa: F401 -- importing this module triggers its
+# automatic backend/.env loading (see app/indexing/config.py) before
+# DATABASE_URL is read below, so the skip check here works correctly even
+# when this file is run in isolation and nothing else has imported
+# app.indexing.config first.
 from app.indexing.database import create_db_engine, init_schema
 from app.indexing.lexical import LexicalIndexer
 from app.indexing.models import build_chunks_table
