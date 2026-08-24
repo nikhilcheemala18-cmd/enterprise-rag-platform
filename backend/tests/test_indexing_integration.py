@@ -45,12 +45,38 @@ from app.models.chunk import Chunk
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-# Deterministic 4-dimensional test vectors -- not real embeddings, just
-# fixed floats so cosine similarity ordering is predictable.
-_VEC_C1 = [1.0, 0.0, 0.0, 0.0]
-_VEC_C2 = [0.0, 1.0, 0.0, 0.0]
-_VEC_C3 = [0.0, 0.0, 1.0, 0.0]
-_VEC_C4 = [0.9, 0.1, 0.0, 0.0]  # deliberately close to C1
+# Matches BGE_DIMENSION (app/embeddings/bge.py) -- this is the dimension
+# the real application (app/api/dependencies.py) actually uses against
+# this same shared `chunks` table, so this test's own schema/vector
+# width must agree with it. A prior mismatch here (this test was once
+# hardcoded to a 4-dimensional column) was the root cause of the
+# database's `chunks.embedding` column getting permanently created as
+# vector(4) via this test's own init_schema() call, breaking real BGE
+# (768-dim) uploads. Do not change this back to a small literal without
+# also confirming it still matches the deployed column width.
+_TEST_EMBEDDING_DIMENSION = 768
+
+
+def _pad(vector: list[float], dimension: int = _TEST_EMBEDDING_DIMENSION) -> list[float]:
+    """Embed a small, hand-computable vector into a larger space by
+    zero-padding. Zero padding does not change cosine similarity/distance
+    between vectors that are equally padded, so this preserves the exact
+    same geometric relationships (and therefore the exact same test
+    assertions) as the original 4-dimensional vectors, just at the
+    dimension the real `chunks` table actually uses.
+    """
+    if len(vector) > dimension:
+        raise ValueError(f"vector of length {len(vector)} does not fit in {dimension} dimensions")
+    return vector + [0.0] * (dimension - len(vector))
+
+
+# Deterministic test vectors -- not real embeddings, just fixed floats
+# (zero-padded to _TEST_EMBEDDING_DIMENSION) so cosine similarity
+# ordering is predictable.
+_VEC_C1 = _pad([1.0, 0.0, 0.0, 0.0])
+_VEC_C2 = _pad([0.0, 1.0, 0.0, 0.0])
+_VEC_C3 = _pad([0.0, 0.0, 1.0, 0.0])
+_VEC_C4 = _pad([0.9, 0.1, 0.0, 0.0])  # deliberately close to C1
 
 
 def _sample_chunks() -> list[Chunk]:
@@ -103,14 +129,16 @@ class TestIndexingIntegration(unittest.TestCase):
     def setUp(self):
         self.engine = create_db_engine(DATABASE_URL)
         self.metadata = MetaData()
-        self.table = build_chunks_table(self.metadata, embedding_dimension=4)
+        self.table = build_chunks_table(self.metadata, embedding_dimension=_TEST_EMBEDDING_DIMENSION)
         init_schema(self.engine, self.metadata)
         with self.engine.begin() as conn:
             conn.execute(self.table.delete())
 
         self.repository = ChunkRepository(self.engine, self.table)
         self.lexical_indexer = LexicalIndexer(self.engine, self.table)
-        self.vector_indexer = VectorIndexer(self.engine, self.table, embedding_dimension=4)
+        self.vector_indexer = VectorIndexer(
+            self.engine, self.table, embedding_dimension=_TEST_EMBEDDING_DIMENSION
+        )
         self.service = IndexingService(
             self.repository, self.lexical_indexer, self.vector_indexer
         )
