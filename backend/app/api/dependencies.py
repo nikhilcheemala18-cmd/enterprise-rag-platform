@@ -36,10 +36,12 @@ from app.indexing.models import build_chunks_table
 from app.indexing.repository import ChunkRepository
 from app.indexing.service import IndexingService
 from app.indexing.vector import VectorIndexer
+from app.rag.llm import GeminiLLMProvider, LLMProvider
 from app.retrieval.hybrid import HybridSearchService
 from app.retrieval.lexical import LexicalRetriever
 from app.retrieval.vector import VectorRetriever
 from app.services.ingestion_service import IngestionService
+from app.services.rag_service import RAGService
 from app.services.retrieval_service import RetrievalService
 
 
@@ -116,3 +118,13 @@ def get_hybrid_search_service() -> HybridSearchService:
 @lru_cache
 def get_retrieval_service() -> RetrievalService:
     return RetrievalService(get_embedding_provider(), get_hybrid_search_service())
+
+
+@lru_cache
+def get_llm_provider() -> LLMProvider:
+    return GeminiLLMProvider()
+
+
+@lru_cache
+def get_rag_service() -> RAGService:
+    return RAGService(get_retrieval_service(), get_llm_provider())
