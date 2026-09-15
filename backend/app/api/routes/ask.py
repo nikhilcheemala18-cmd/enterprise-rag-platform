@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 from app.api.dependencies import get_rag_service
 from app.services.rag_service import (
     GenerationFailedError,
+    GenerationTemporarilyUnavailableError,
     InvalidQuestionError,
     RAGService,
     RetrievalFailedError,
@@ -68,6 +69,15 @@ def ask_question(
     except RetrievalFailedError as exc:
         logger.exception("Retrieval failed while answering question %r", request.question)
         raise HTTPException(status_code=500, detail="Retrieval failed.") from exc
+    except GenerationTemporarilyUnavailableError as exc:
+        logger.exception("AI service temporarily unavailable while answering question %r", request.question)
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "The AI service is temporarily unavailable due to high demand. "
+                "Please try again shortly."
+            ),
+        ) from exc
     except GenerationFailedError as exc:
         logger.exception("Generation failed while answering question %r", request.question)
         raise HTTPException(status_code=500, detail="Answer generation failed.") from exc

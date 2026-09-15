@@ -44,3 +44,4 @@ htmlcov/
 # Temporary Files
 *.tmp
 *.temp
+backend/tmp/

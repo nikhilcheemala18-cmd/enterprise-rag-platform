@@ -1,0 +1,229 @@
+{
+  "benchmark_id": "controlled_enterprise_v1",
+  "cases": [
+    {
+      "id": "controlled-v1-q01",
+      "category": "exact_keyword",
+      "question": "What is the advance notice required for a domestic trip above INR 20,000?",
+      "expected_document": "employee_travel_expense_policy.pdf",
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "3a3123d9-cd42-4b2d-bc4c-2278821f668d"
+      ],
+      "expected_evidence": [
+        "Domestic",
+        "Above INR 20,000",
+        "5 business days"
+      ],
+      "expected_topic": "Travel approval rules table",
+      "relevant_keywords": [
+        "domestic",
+        "above INR 20,000",
+        "advance notice",
+        "5 business days"
+      ],
+      "answerable": true,
+      "expected_answer": "A domestic trip above INR 20,000 requires 5 business days advance notice and director approval."
+    },
+    {
+      "id": "controlled-v1-q02",
+      "category": "semantic_paraphrase",
+      "question": "When can an employee get reimbursed for using their own car on a short business trip?",
+      "expected_document": "employee_travel_expense_policy.pdf",
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "f4f7f509-f1ce-462f-96ee-4638b74c50c8"
+      ],
+      "expected_evidence": [
+        "Personal vehicle reimbursement is allowed only for trips below 300 kilometers",
+        "INR 14 per kilometer"
+      ],
+      "expected_topic": "Domestic travel policy personal vehicle reimbursement",
+      "relevant_keywords": [
+        "personal vehicle",
+        "300 kilometers",
+        "INR 14 per kilometer"
+      ],
+      "answerable": true,
+      "expected_answer": "Personal vehicle reimbursement is allowed only for trips below 300 kilometers and is paid at INR 14 per kilometer."
+    },
+    {
+      "id": "controlled-v1-q03",
+      "category": "numerical_table",
+      "question": "What is the nightly hotel limit for E1-E5 employees in India Tier 1 cities?",
+      "expected_document": "employee_travel_expense_policy.pdf",
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "067eda37-28bc-4a16-912b-b03fd00efdc3"
+      ],
+      "expected_evidence": [
+        "India Tier 1 cities",
+        "E1-E5",
+        "INR 8,500"
+      ],
+      "expected_topic": "Hotel limits table",
+      "relevant_keywords": [
+        "hotel",
+        "E1-E5",
+        "India Tier 1 cities",
+        "INR 8,500"
+      ],
+      "answerable": true,
+      "expected_answer": "The nightly hotel limit is INR 8,500 for E1-E5 employees in India Tier 1 cities."
+    },
+    {
+      "id": "controlled-v1-q04",
+      "category": "numerical_table",
+      "question": "How long can emergency break-glass access last?",
+      "expected_document": "information_security_access_management_policy.pdf",
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "eeab82fe-6516-4ef9-a4ef-b05dd22e0923"
+      ],
+      "expected_evidence": [
+        "Emergency break-glass",
+        "8 hours",
+        "Incident ticket and post-use review"
+      ],
+      "expected_topic": "Access request and approval process table",
+      "relevant_keywords": [
+        "Emergency break-glass",
+        "8 hours",
+        "CISO",
+        "post-use review"
+      ],
+      "answerable": true,
+      "expected_answer": "Emergency break-glass access can last up to 8 hours and requires an incident ticket and post-use review."
+    },
+    {
+      "id": "controlled-v1-q05",
+      "category": "specific_section",
+      "question": "According to the incident reporting section, how quickly must suspected phishing be reported?",
+      "expected_document": "information_security_access_management_policy.pdf",
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "a15f250b-2f21-4f23-a746-a81a1eaa6bdb"
+      ],
+      "expected_evidence": [
+        "Employees must report suspected phishing",
+        "within 1 hour of discovery"
+      ],
+      "expected_topic": "Incident reporting",
+      "relevant_keywords": [
+        "incident reporting",
+        "suspected phishing",
+        "1 hour"
+      ],
+      "answerable": true,
+      "expected_answer": "Suspected phishing must be reported to Security Operations within 1 hour of discovery."
+    },
+    {
+      "id": "controlled-v1-q06",
+      "category": "multi_chunk",
+      "question": "What approvals and documentation are needed for a travel policy exception?",
+      "expected_document": "employee_travel_expense_policy.pdf",
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "5e0fe999-c5f2-40e4-a721-30ea7f97b338"
+      ],
+      "expected_evidence": [
+        "Policy exceptions must be requested before booking whenever possible",
+        "policy limit, actual expected cost, business reason, and approving leader"
+      ],
+      "expected_topic": "Travel exceptions",
+      "relevant_keywords": [
+        "policy exceptions",
+        "before booking",
+        "policy limit",
+        "approving leader"
+      ],
+      "answerable": true,
+      "expected_answer": "A travel exception should be requested before booking and include the policy limit, actual expected cost, business reason, and approving leader."
+    },
+    {
+      "id": "controlled-v1-q07",
+      "category": "cross_section",
+      "question": "Compare the normal review schedule for confidential data access with privileged administrator access.",
+      "expected_document": "information_security_access_management_policy.pdf",
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "9a989288-72b2-4709-9767-25bf90dd7f8d"
+      ],
+      "expected_evidence": [
+        "System owners review confidential data access every 90 days",
+        "Security reviews privileged administrator access monthly"
+      ],
+      "expected_topic": "Access reviews and data classification",
+      "relevant_keywords": [
+        "confidential data access",
+        "90 days",
+        "privileged administrator",
+        "monthly"
+      ],
+      "answerable": true,
+      "expected_answer": "Confidential data access is reviewed every 90 days by system owners; privileged administrator access is reviewed monthly by Security."
+    },
+    {
+      "id": "controlled-v1-q08",
+      "category": "plausible_distractor",
+      "question": "Is Redis cache availability relevant to employee travel reimbursement approvals?",
+      "expected_document": "employee_travel_expense_policy.pdf",
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "535ea9ce-0d13-45a7-a971-567a0de6face",
+        "a4577cc7-6034-4785-bb2c-ada210359101"
+      ],
+      "expected_evidence": [
+        "All travel must be requested in the Meridian Travel Portal before booking",
+        "Approved reimbursements are paid in the next payroll cycle"
+      ],
+      "expected_topic": "Travel approvals and reimbursement; distractor term Redis is absent",
+      "relevant_keywords": [
+        "Travel Portal",
+        "reimbursement",
+        "approval",
+        "Redis"
+      ],
+      "answerable": true,
+      "expected_answer": "No. Travel reimbursement approvals are governed by the Travel Portal and Expense Portal workflow; Redis cache availability is not part of this policy."
+    },
+    {
+      "id": "controlled-v1-q09",
+      "category": "semantic_different_wording",
+      "question": "What happens if a company laptop is missing urgent security updates for more than a week?",
+      "expected_document": "information_security_access_management_policy.pdf",
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "70353e8c-5aac-4254-b6d6-1e9bcd63f087"
+      ],
+      "expected_evidence": [
+        "Laptops missing critical patches for more than 7 days are blocked from VPN access"
+      ],
+      "expected_topic": "Device and endpoint security requirements",
+      "relevant_keywords": [
+        "critical patches",
+        "7 days",
+        "blocked from VPN access"
+      ],
+      "answerable": true,
+      "expected_answer": "Laptops missing critical patches for more than 7 days are blocked from VPN access."
+    },
+    {
+      "id": "controlled-v1-q10",
+      "category": "unanswerable",
+      "question": "What is the company's approved reimbursement rate for pet boarding during international travel?",
+      "expected_document": null,
+      "expected_document_id": null,
+      "expected_chunk_ids": [],
+      "expected_evidence": [],
+      "expected_topic": "Not present in the benchmark documents",
+      "relevant_keywords": [
+        "pet boarding",
+        "international travel",
+        "reimbursement rate"
+      ],
+      "answerable": false,
+      "expected_answer": "The information is not present in the benchmark documents."
+    }
+  ]
+}

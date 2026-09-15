@@ -37,6 +37,16 @@ BT /F1 10 Tf 50 750 Td (Page two content.) Tj ET
 q 80 0 0 80 50 600 cm /Im0 Do Q
 """
 
+_MULTILINE_TEXT_CONTENT = b"""
+BT /F1 18 Tf 50 750 Td (Operations Guide) Tj ET
+BT /F1 10 Tf 50 720 Td (Northstar accepts events from the Edge Gateway and writes them to the durable) Tj ET
+BT /F1 10 Tf 50 706 Td (Event Log before acknowledging the client. This protects against downstream) Tj ET
+BT /F1 10 Tf 50 692 Td (outages and worker restarts.) Tj ET
+BT /F1 10 Tf 50 660 Td (Operators inspect consumer lag only after confirming gateway availability and) Tj ET
+BT /F1 10 Tf 50 646 Td (ingestion latency remain within the documented service limits.) Tj ET
+BT /F1 8 Tf 50 40 Td (Synthetic footer Page 1) Tj ET
+"""
+
 
 def _add_font(writer: PdfWriter):
     font_dict = DictionaryObject()
@@ -90,6 +100,22 @@ def _build_fixture_pdf(path: Path) -> None:
 def _build_empty_pdf(path: Path) -> None:
     writer = PdfWriter()
     writer.add_blank_page(width=400, height=800)
+    with open(path, "wb") as f:
+        writer.write(f)
+
+
+def _build_multiline_text_pdf(path: Path) -> None:
+    writer = PdfWriter()
+    font_ref = _add_font(writer)
+
+    page = writer.add_blank_page(width=400, height=800)
+    resources = DictionaryObject()
+    resources[NameObject("/Font")] = DictionaryObject({NameObject("/F1"): font_ref})
+    page[NameObject("/Resources")] = resources
+    content = DecodedStreamObject()
+    content.set_data(_MULTILINE_TEXT_CONTENT)
+    page.replace_contents(content)
+
     with open(path, "wb") as f:
         writer.write(f)
 
@@ -253,6 +279,45 @@ class TestPDFLoaderEmptyPDF(unittest.TestCase):
             self.assertIsInstance(document, NormalizedDocument)
             self.assertEqual(document.elements, [])
             self.assertEqual(document.metadata.extra["page_count"], 1)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+class TestPDFLoaderParagraphMerging(unittest.TestCase):
+    def test_adjacent_body_lines_merge_into_paragraph_elements(self):
+        tmp_dir = Path(tempfile.mkdtemp())
+        try:
+            path = tmp_dir / "multiline.pdf"
+            _build_multiline_text_pdf(path)
+
+            loader = PDFLoader(asset_dir=tmp_dir / "assets")
+            document = loader.load(path)
+            text_elements = [
+                element
+                for element in document.elements
+                if isinstance(element, TextElement)
+            ]
+
+            self.assertEqual(len(text_elements), 4)
+            self.assertEqual(text_elements[0].content, "Operations Guide")
+            self.assertEqual(text_elements[0].heading_level, 1)
+            self.assertEqual(
+                text_elements[1].content,
+                "Northstar accepts events from the Edge Gateway and writes them to the durable "
+                "Event Log before acknowledging the client. This protects against downstream "
+                "outages and worker restarts.",
+            )
+            self.assertEqual(
+                text_elements[2].content,
+                "Operators inspect consumer lag only after confirming gateway availability and "
+                "ingestion latency remain within the documented service limits.",
+            )
+            self.assertEqual(text_elements[3].content, "Synthetic footer Page 1")
+
+            for element in text_elements:
+                self.assertEqual(element.source.location.page_number, 1)
+            self.assertEqual(text_elements[1].section_path, ["Operations Guide"])
+            self.assertEqual(text_elements[2].section_path, ["Operations Guide"])
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 

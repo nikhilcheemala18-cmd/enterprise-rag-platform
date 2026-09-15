@@ -2,7 +2,7 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from app.rag.llm import LLMProvider
+from app.rag.llm import LLMProvider, LLMServiceUnavailableError
 from app.rag.prompt import SYSTEM_INSTRUCTION, build_user_prompt
 from app.services.retrieval_service import RetrievalService
 
@@ -21,6 +21,10 @@ class RetrievalFailedError(RAGError, RuntimeError):
 
 class GenerationFailedError(RAGError, RuntimeError):
     """The injected LLMProvider failed to generate an answer."""
+
+
+class GenerationTemporarilyUnavailableError(GenerationFailedError):
+    """The LLM provider is temporarily unavailable."""
 
 
 class RAGSource(BaseModel):
@@ -103,6 +107,10 @@ class RAGService:
             answer_text = self.llm_provider.generate(
                 prompt, system_instruction=SYSTEM_INSTRUCTION
             )
+        except LLMServiceUnavailableError as exc:
+            raise GenerationTemporarilyUnavailableError(
+                f"Answer generation temporarily unavailable ({type(exc).__name__})"
+            ) from exc
         except Exception as exc:
             raise GenerationFailedError(
                 f"Answer generation failed ({type(exc).__name__})"

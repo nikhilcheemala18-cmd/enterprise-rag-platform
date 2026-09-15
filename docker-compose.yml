@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    environment:
+      PORT: "${PORT:-8000}"
+      DATABASE_URL: "${DATABASE_URL:?DATABASE_URL is required}"
+      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
+      EMBEDDING_PROVIDER: "${EMBEDDING_PROVIDER:-bge}"
+      EMBEDDING_DIMENSION: "${EMBEDDING_DIMENSION:-768}"

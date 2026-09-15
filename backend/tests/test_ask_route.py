@@ -6,6 +6,7 @@ from app.api.dependencies import get_rag_service
 from app.main import app
 from app.services.rag_service import (
     GenerationFailedError,
+    GenerationTemporarilyUnavailableError,
     InvalidQuestionError,
     RAGAnswer,
     RAGSource,
@@ -226,6 +227,22 @@ class TestAskServiceFailures(BaseAskTestCase):
         response = self.client.post("/ask", json={"question": "some question"})
 
         self.assertEqual(response.status_code, 500)
+        self.assertNotIn(secret, response.text)
+
+    def test_temporary_generation_failure_maps_to_503_with_friendly_message(self):
+        secret = "AIzaSyFAKESECRETVALUEFORTESTINGONLY123"
+        fake = FakeRAGService(
+            error=GenerationTemporarilyUnavailableError(f"503 unavailable, key={secret}")
+        )
+        override_rag_service(fake)
+
+        response = self.client.post("/ask", json={"question": "some question"})
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(
+            response.json()["detail"],
+            "The AI service is temporarily unavailable due to high demand. Please try again shortly.",
+        )
         self.assertNotIn(secret, response.text)
 
     def test_unexpected_exception_maps_to_500_without_leaking_details(self):

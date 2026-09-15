@@ -23,6 +23,10 @@ from app.models.document import (
 _CAPTION_RE = re.compile(r"^(figure|fig\.?|chart|diagram)\b", re.IGNORECASE)
 _HEADING_SIZE_RATIO = 1.15
 _LINE_TOP_TOLERANCE = 3.0
+_FONT_SIZE_TOLERANCE = 0.75
+_LEFT_EDGE_TOLERANCE = 12.0
+_PARAGRAPH_GAP_MULTIPLIER = 1.75
+_MAX_LINE_GAP_TO_FONT_SIZE_RATIO = 0.85
 _CAPTION_MAX_VERTICAL_GAP = 40.0
 _DEFAULT_ASSET_DIR = Path(tempfile.gettempdir()) / "enterprise_rag_pdf_assets"
 
@@ -63,6 +67,107 @@ def _extract_text_lines(page: "pdfplumber.page.Page") -> list[dict[str, Any]]:
         size = max(w["size"] for w in group)
         lines.append({"content": content, "bbox": bbox, "size": size})
     return lines
+
+
+def _is_heading_line(line: dict[str, Any], body_size: float | None) -> bool:
+    return body_size is not None and line["size"] > body_size * _HEADING_SIZE_RATIO
+
+
+def _typical_body_line_gap(
+    lines: list[dict[str, Any]], body_size: float | None
+) -> float | None:
+    gaps: list[float] = []
+    for previous, current in zip(lines, lines[1:]):
+        if _is_heading_line(previous, body_size) or _is_heading_line(current, body_size):
+            continue
+        if abs(previous["size"] - current["size"]) > _FONT_SIZE_TOLERANCE:
+            continue
+        if abs(previous["bbox"][0] - current["bbox"][0]) > _LEFT_EDGE_TOLERANCE:
+            continue
+
+        gap = current["bbox"][1] - previous["bbox"][3]
+        if 0 <= gap <= previous["size"]:
+            gaps.append(gap)
+
+    return statistics.median(gaps) if gaps else None
+
+
+def _has_intervening_table(
+    previous: dict[str, Any],
+    current: dict[str, Any],
+    table_bboxes: list[BBox],
+) -> bool:
+    previous_bottom = previous["bbox"][3]
+    current_top = current["bbox"][1]
+    return any(previous_bottom <= table[1] and table[3] <= current_top for table in table_bboxes)
+
+
+def _should_merge_text_lines(
+    previous: dict[str, Any],
+    current: dict[str, Any],
+    body_size: float | None,
+    typical_gap: float | None,
+    table_bboxes: list[BBox],
+) -> bool:
+    if _is_heading_line(previous, body_size) or _is_heading_line(current, body_size):
+        return False
+    if abs(previous["size"] - current["size"]) > _FONT_SIZE_TOLERANCE:
+        return False
+    if abs(previous["bbox"][0] - current["bbox"][0]) > _LEFT_EDGE_TOLERANCE:
+        return False
+    if _has_intervening_table(previous, current, table_bboxes):
+        return False
+
+    gap = current["bbox"][1] - previous["bbox"][3]
+    if gap < 0:
+        return False
+
+    if typical_gap is None:
+        max_gap = previous["size"] * 0.5
+    else:
+        max_gap = min(
+            typical_gap * _PARAGRAPH_GAP_MULTIPLIER,
+            previous["size"] * _MAX_LINE_GAP_TO_FONT_SIZE_RATIO,
+        )
+    return gap <= max_gap
+
+
+def _merge_text_lines_into_blocks(
+    lines: list[dict[str, Any]], body_size: float | None, table_bboxes: list[BBox]
+) -> list[dict[str, Any]]:
+    """Merge adjacent visual body lines into conservative paragraph blocks.
+
+    Headings stay as standalone blocks. Page and table boundaries are honored
+    by the caller/passed table boxes; this only groups body lines that look
+    like ordinary wrapped text in the same paragraph.
+    """
+    if not lines:
+        return []
+
+    typical_gap = _typical_body_line_gap(lines, body_size)
+    blocks: list[dict[str, Any]] = []
+    current = dict(lines[0])
+    last_line = lines[0]
+
+    for line in lines[1:]:
+        if _should_merge_text_lines(last_line, line, body_size, typical_gap, table_bboxes):
+            bbox = current["bbox"]
+            line_bbox = line["bbox"]
+            current["content"] = f"{current['content']} {line['content']}"
+            current["bbox"] = (
+                min(bbox[0], line_bbox[0]),
+                min(bbox[1], line_bbox[1]),
+                max(bbox[2], line_bbox[2]),
+                max(bbox[3], line_bbox[3]),
+            )
+            current["size"] = max(current["size"], line["size"])
+        else:
+            blocks.append(current)
+            current = dict(line)
+        last_line = line
+
+    blocks.append(current)
+    return blocks
 
 
 def _extract_tables(page: "pdfplumber.page.Page") -> list[dict[str, Any]]:
@@ -204,6 +309,12 @@ class PDFLoader(DocumentLoader):
         ]
         body_size = statistics.mode(all_sizes) if all_sizes else None
 
+        for page_data in pages_data:
+            table_bboxes = [t["bbox"] for t in page_data["tables"]]
+            page_data["text_blocks"] = _merge_text_lines_into_blocks(
+                page_data["lines"], body_size, table_bboxes
+            )
+
         metadata = DocumentMetadata(
             filename=path.name,
             file_type="pdf",
@@ -220,7 +331,7 @@ class PDFLoader(DocumentLoader):
             page_number = page_data["page_number"]
 
             items: list[dict[str, Any]] = []
-            for line in page_data["lines"]:
+            for line in page_data["text_blocks"]:
                 items.append({"kind": "text", "top": line["bbox"][1], "line": line})
             for table in page_data["tables"]:
                 items.append(

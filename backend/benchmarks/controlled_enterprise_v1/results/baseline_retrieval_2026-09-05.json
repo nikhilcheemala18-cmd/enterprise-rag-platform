@@ -1,0 +1,1246 @@
+{
+  "benchmark_id": "controlled_enterprise_v1",
+  "run_type": "baseline_retrieval_only",
+  "generated_at": "2026-09-05T08:48:19.114464+00:00",
+  "dataset_path": "benchmarks/controlled_enterprise_v1/evaluation_dataset.json",
+  "generation_evaluated": false,
+  "document_uploads": [
+    {
+      "filename": "employee_travel_expense_policy.pdf",
+      "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "chunk_count": 23,
+      "indexed_chunk_count": 23,
+      "verified_db_chunk_count": 23,
+      "chunk_type_counts": [
+        {
+          "element_type": "table",
+          "count": 3
+        },
+        {
+          "element_type": "text",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "filename": "information_security_access_management_policy.pdf",
+      "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "chunk_count": 25,
+      "indexed_chunk_count": 25,
+      "verified_db_chunk_count": 25,
+      "chunk_type_counts": [
+        {
+          "element_type": "table",
+          "count": 4
+        },
+        {
+          "element_type": "text",
+          "count": 21
+        }
+      ]
+    }
+  ],
+  "aggregate_report_text": "Questions evaluated: 10\nRecall@5: 89%\nPrecision@5: 24%\nRecall@10: 89%\nPrecision@10: 14%\nMRR: 0.83\nSource grounding: 89%\nAnswer accuracy: not automatically evaluated\nAverage query embedding latency: 84.2 ms\nAverage lexical retrieval latency: 520.7 ms\nAverage vector retrieval latency: 409.2 ms\nAverage RRF latency: 0.2 ms\nAverage hybrid/RRF retrieval latency: 930.1 ms\nAverage total /ask latency: 1.01 s",
+  "latency_averages_ms": {
+    "query_embedding_ms": 84.23415998113342,
+    "lexical_retrieval_ms": 520.7094199955463,
+    "vector_retrieval_ms": 409.2490600014571,
+    "rrf_ms": 0.170809990959242,
+    "hybrid_retrieval_ms": 930.1488600031007,
+    "total_ask_ms": 1014.4373699906282
+  },
+  "per_question": [
+    {
+      "id": "controlled-v1-q01",
+      "question": "What is the advance notice required for a domestic trip above INR 20,000?",
+      "answerable": true,
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "3a3123d9-cd42-4b2d-bc4c-2278821f668d"
+      ],
+      "expected_chunk_ranks": {
+        "3a3123d9-cd42-4b2d-bc4c-2278821f668d": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "Domestic": 1,
+        "Above INR 20,000": 1,
+        "5 business days": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.8,
+      "precision_at_10": 0.6,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 121.89799995394424,
+        "lexical_retrieval_ms": 2141.853599983733,
+        "vector_retrieval_ms": 410.767900000792,
+        "rrf_ms": 0.706199964042753,
+        "hybrid_retrieval_ms": 2553.3526999643072,
+        "generation_ms": null,
+        "total_ask_ms": 2675.3219999955036
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "3a3123d9-cd42-4b2d-bc4c-2278821f668d",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.03278688524590164,
+          "element_type": "table",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nTable:\nTrip Type | Cost Threshold | Required Approval | Advance Notice\nDomestic | Up to INR 20,000 | Manager | 3 business days\nDomestic | Above INR 20,000 | Director | 5 business days\nInternational | Up to INR 250,000 | Direc",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "535ea9ce-0d13-45a7-a971-567a0de6face",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nAll travel must be requested in the Meridian Travel Portal before booking. Domestic trips require manager approval when the estimated trip cost is INR 20,000 or below and director approval above INR 20,000. International trip",
+          "matches_expected": true
+        },
+        {
+          "rank": 3,
+          "chunk_id": "f4f7f509-f1ce-462f-96ee-4638b74c50c8",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015873015873015872,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\nEmployees must select economy class for domestic flights under five hours. Premium economy is permitted for domestic routes of five hours or more when the fare difference is less than INR 4,000. Business class is limited to ",
+          "matches_expected": true
+        },
+        {
+          "rank": 4,
+          "chunk_id": "8adc1ada-9499-46ff-a2a4-13513022e12e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\n3. Domestic Travel Policy",
+          "matches_expected": true
+        },
+        {
+          "rank": 5,
+          "chunk_id": "5e0fe999-c5f2-40e4-a721-30ea7f97b338",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015384615384615385,
+          "element_type": "text",
+          "section_path": [
+            "9. Exceptions"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 9. Exceptions\n\nPolicy exceptions must be requested before booking whenever possible. The request must include the policy limit, actual expected cost, business reason, and approving leader. Finance may audit any exception after reimbursement.\n\nRepeated",
+          "matches_expected": false
+        },
+        {
+          "rank": 6,
+          "chunk_id": "661f0589-9adb-40f2-a05f-494448927961",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015151515151515152,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\nInternational flights under six hours must be booked in economy class. Business class may be booked for international flight segments of six hours or more by employees at grade M4 and above. Employees below grade M4 nee",
+          "matches_expected": false
+        },
+        {
+          "rank": 7,
+          "chunk_id": "dbf09aa9-72cb-46fd-b6b8-11485b850444",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014925373134328358,
+          "element_type": "table",
+          "section_path": [
+            "6. Meal and Per-Diem Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Meal and Per-Diem Limits\n\nTable:\nMeal Category | Domestic Cap | International Cap | Receipt Required\nBreakfast | INR 350 | USD 12 | Above INR 250 or USD 10\nLunch | INR 600 | USD 22 | Above INR 500 or USD 15\nDinner | INR 900 | USD 35 | Above INR 500",
+          "matches_expected": true
+        },
+        {
+          "rank": 8,
+          "chunk_id": "51c456d7-882f-4dc4-adc0-7e0184188f66",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014705882352941176,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\n2. Travel Approval Rules",
+          "matches_expected": false
+        },
+        {
+          "rank": 9,
+          "chunk_id": "067eda37-28bc-4a16-912b-b03fd00efdc3",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014492753623188406,
+          "element_type": "table",
+          "section_path": [
+            "5. Hotel Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 5. Hotel Limits\n\nTable:\nLocation Category | Employee Grade | Nightly Limit | Currency\nIndia Tier 1 cities | E1-E5 | INR 8,500 | INR\nIndia Tier 1 cities | M1 and above | INR 12,000 | INR\nIndia Tier 2 or Tier 3 cities | All grades | INR 6,500 | INR\nStan",
+          "matches_expected": false
+        },
+        {
+          "rank": 10,
+          "chunk_id": "6c02ac0d-d40e-42a1-9042-cf163d8e809e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014285714285714285,
+          "element_type": "text",
+          "section_path": [
+            "1. Purpose and Scope"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 1. Purpose and Scope\n\nThis Employee Travel and Expense Policy defines how Meridian Retail Group employees request business travel, book transportation, select lodging, claim meals, and submit reimbursable expenses. The policy applies to all full-time ",
+          "matches_expected": true
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q02",
+      "question": "When can an employee get reimbursed for using their own car on a short business trip?",
+      "answerable": true,
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "f4f7f509-f1ce-462f-96ee-4638b74c50c8"
+      ],
+      "expected_chunk_ranks": {
+        "f4f7f509-f1ce-462f-96ee-4638b74c50c8": 2
+      },
+      "first_relevant_rank": 2,
+      "expected_evidence_ranks": {
+        "Personal vehicle reimbursement is allowed only for trips below 300 kilometers": 2,
+        "INR 14 per kilometer": 2
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 0.5,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 119.06870000530034,
+        "lexical_retrieval_ms": 287.5402999925427,
+        "vector_retrieval_ms": 410.4475000058301,
+        "rrf_ms": 0.20549999317154288,
+        "hybrid_retrieval_ms": 698.2133999699727,
+        "generation_ms": null,
+        "total_ask_ms": 817.337199987378
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "4aa25480-5ee4-4028-b9b8-f4c06d68bb1e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "7. Transportation Rules"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 7. Transportation Rules\n\nAirport transfers, taxis, rideshare, metro fares, and parking are reimbursable when directly connected to approved business travel. Travelers must use standard rideshare categories unless safety, accessibility, or client sched",
+          "matches_expected": false
+        },
+        {
+          "rank": 2,
+          "chunk_id": "f4f7f509-f1ce-462f-96ee-4638b74c50c8",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\nEmployees must select economy class for domestic flights under five hours. Premium economy is permitted for domestic routes of five hours or more when the fare difference is less than INR 4,000. Business class is limited to ",
+          "matches_expected": true
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d36da241-527d-40cb-bc9c-0ec8d6e6defe",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015873015873015872,
+          "element_type": "text",
+          "section_path": [
+            "Employee Travel and Expense Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: Employee Travel and Expense Policy\n\nEmployee Travel and Expense Policy",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "6c02ac0d-d40e-42a1-9042-cf163d8e809e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "1. Purpose and Scope"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 1. Purpose and Scope\n\nThis Employee Travel and Expense Policy defines how Meridian Retail Group employees request business travel, book transportation, select lodging, claim meals, and submit reimbursable expenses. The policy applies to all full-time ",
+          "matches_expected": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "5e0fe999-c5f2-40e4-a721-30ea7f97b338",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015384615384615385,
+          "element_type": "text",
+          "section_path": [
+            "9. Exceptions"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 9. Exceptions\n\nPolicy exceptions must be requested before booking whenever possible. The request must include the policy limit, actual expected cost, business reason, and approving leader. Finance may audit any exception after reimbursement.\n\nRepeated",
+          "matches_expected": false
+        },
+        {
+          "rank": 6,
+          "chunk_id": "30e9bfa1-747b-4630-8372-20275df9633e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015151515151515152,
+          "element_type": "text",
+          "section_path": [
+            "6. Meal and Per-Diem Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Meal and Per-Diem Limits\n\nMeal reimbursement is based on actual expenses up to the published cap. Alcohol is not reimbursable unless part of a client entertainment event approved by a director. When breakfast is included in the hotel rate, the brea",
+          "matches_expected": false
+        },
+        {
+          "rank": 7,
+          "chunk_id": "a4577cc7-6034-4785-bb2c-ada210359101",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014925373134328358,
+          "element_type": "text",
+          "section_path": [
+            "8. Expense Submission and Reimbursement"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 8. Expense Submission and Reimbursement\n\nExpense reports must be submitted in the Meridian Expense Portal within 30 calendar days after trip completion. Claims submitted between 31 and 60 days require manager approval and a late-submission reason. Cla",
+          "matches_expected": false
+        },
+        {
+          "rank": 8,
+          "chunk_id": "661f0589-9adb-40f2-a05f-494448927961",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014705882352941176,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\nInternational flights under six hours must be booked in economy class. Business class may be booked for international flight segments of six hours or more by employees at grade M4 and above. Employees below grade M4 nee",
+          "matches_expected": false
+        },
+        {
+          "rank": 9,
+          "chunk_id": "1690ceb4-9fc8-4716-ba95-da8429673e61",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014492753623188406,
+          "element_type": "text",
+          "section_path": [
+            "8. Expense Submission and Reimbursement"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 8. Expense Submission and Reimbursement\n\n8. Expense Submission and Reimbursement",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q03",
+      "question": "What is the nightly hotel limit for E1-E5 employees in India Tier 1 cities?",
+      "answerable": true,
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "067eda37-28bc-4a16-912b-b03fd00efdc3"
+      ],
+      "expected_chunk_ranks": {
+        "067eda37-28bc-4a16-912b-b03fd00efdc3": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "India Tier 1 cities": 1,
+        "E1-E5": 1,
+        "INR 8,500": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 74.74959996761754,
+        "lexical_retrieval_ms": 333.97490001516417,
+        "vector_retrieval_ms": 409.3194999732077,
+        "rrf_ms": 0.11490000179037452,
+        "hybrid_retrieval_ms": 743.4273000108078,
+        "generation_ms": null,
+        "total_ask_ms": 818.2263000053354
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "067eda37-28bc-4a16-912b-b03fd00efdc3",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.03278688524590164,
+          "element_type": "table",
+          "section_path": [
+            "5. Hotel Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 5. Hotel Limits\n\nTable:\nLocation Category | Employee Grade | Nightly Limit | Currency\nIndia Tier 1 cities | E1-E5 | INR 8,500 | INR\nIndia Tier 1 cities | M1 and above | INR 12,000 | INR\nIndia Tier 2 or Tier 3 cities | All grades | INR 6,500 | INR\nStan",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "79da668d-c2e7-400f-b04c-885db9562c94",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "5. Hotel Limits"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 5. Hotel Limits\n\n5. Hotel Limits",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "99eecf48-3378-4d91-979a-10c968660d73",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015873015873015872,
+          "element_type": "text",
+          "section_path": [
+            "5. Hotel Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 5. Hotel Limits\n\nEmployees should book hotels through the Meridian Travel Portal unless a client-designated hotel is required. Hotel rates include room charge and taxes but exclude laundry, minibar, movies, and personal services.",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "f4f7f509-f1ce-462f-96ee-4638b74c50c8",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\nEmployees must select economy class for domestic flights under five hours. Premium economy is permitted for domestic routes of five hours or more when the fare difference is less than INR 4,000. Business class is limited to ",
+          "matches_expected": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "dbf09aa9-72cb-46fd-b6b8-11485b850444",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015384615384615385,
+          "element_type": "table",
+          "section_path": [
+            "6. Meal and Per-Diem Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Meal and Per-Diem Limits\n\nTable:\nMeal Category | Domestic Cap | International Cap | Receipt Required\nBreakfast | INR 350 | USD 12 | Above INR 250 or USD 10\nLunch | INR 600 | USD 22 | Above INR 500 or USD 15\nDinner | INR 900 | USD 35 | Above INR 500",
+          "matches_expected": false
+        },
+        {
+          "rank": 6,
+          "chunk_id": "3a3123d9-cd42-4b2d-bc4c-2278821f668d",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015151515151515152,
+          "element_type": "table",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nTable:\nTrip Type | Cost Threshold | Required Approval | Advance Notice\nDomestic | Up to INR 20,000 | Manager | 3 business days\nDomestic | Above INR 20,000 | Director | 5 business days\nInternational | Up to INR 250,000 | Direc",
+          "matches_expected": false
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6c02ac0d-d40e-42a1-9042-cf163d8e809e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014925373134328358,
+          "element_type": "text",
+          "section_path": [
+            "1. Purpose and Scope"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 1. Purpose and Scope\n\nThis Employee Travel and Expense Policy defines how Meridian Retail Group employees request business travel, book transportation, select lodging, claim meals, and submit reimbursable expenses. The policy applies to all full-time ",
+          "matches_expected": false
+        },
+        {
+          "rank": 8,
+          "chunk_id": "535ea9ce-0d13-45a7-a971-567a0de6face",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014705882352941176,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nAll travel must be requested in the Meridian Travel Portal before booking. Domestic trips require manager approval when the estimated trip cost is INR 20,000 or below and director approval above INR 20,000. International trip",
+          "matches_expected": false
+        },
+        {
+          "rank": 9,
+          "chunk_id": "661f0589-9adb-40f2-a05f-494448927961",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014492753623188406,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\nInternational flights under six hours must be booked in economy class. Business class may be booked for international flight segments of six hours or more by employees at grade M4 and above. Employees below grade M4 nee",
+          "matches_expected": false
+        },
+        {
+          "rank": 10,
+          "chunk_id": "30e9bfa1-747b-4630-8372-20275df9633e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014285714285714285,
+          "element_type": "text",
+          "section_path": [
+            "6. Meal and Per-Diem Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Meal and Per-Diem Limits\n\nMeal reimbursement is based on actual expenses up to the published cap. Alcohol is not reimbursable unless part of a client entertainment event approved by a director. When breakfast is included in the hotel rate, the brea",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q04",
+      "question": "How long can emergency break-glass access last?",
+      "answerable": true,
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "eeab82fe-6516-4ef9-a4ef-b05dd22e0923"
+      ],
+      "expected_chunk_ranks": {
+        "eeab82fe-6516-4ef9-a4ef-b05dd22e0923": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "Emergency break-glass": 1,
+        "8 hours": 1,
+        "Incident ticket and post-use review": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 85.24289994966239,
+        "lexical_retrieval_ms": 426.48039996856824,
+        "vector_retrieval_ms": 393.86440004454926,
+        "rrf_ms": 0.06920000305399299,
+        "hybrid_retrieval_ms": 820.4353000037372,
+        "generation_ms": null,
+        "total_ask_ms": 905.7400999590755
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "eeab82fe-6516-4ef9-a4ef-b05dd22e0923",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.01639344262295082,
+          "element_type": "table",
+          "section_path": [
+            "4. Access Request and Approval Process"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 4. Access Request and Approval Process\n\nTable:\nAccess Category | Approver | Maximum Duration | Review Evidence\nPrivileged administrator | Director + Security | 90 days | Admin access review record\nEmergency break-glass | CISO or delegate | 8 hours | I",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "f4722edf-8661-4517-9eea-b5eb81e4a40b",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "4. Access Request and Approval Process"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. Access Request and Approval Process\n\nAccess requests must be submitted through the Access Portal with business justification, system name, requested role, data classification, duration, and approving manager. Access to confidential or restricted sy",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "543c78e8-dc45-426e-aafb-77346e3a3ffd",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015873015873015872,
+          "element_type": "table",
+          "section_path": [
+            "4. Access Request and Approval Process"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. Access Request and Approval Process\n\nTable:\nAccess Category | Approver | Maximum Duration | Review Evidence\nStandard application access | Manager | Indefinite while role remains valid | Access Portal request\nConfidential data access | Manager + Sys",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "518cddf3-0015-4077-8002-9d5d0aed3d4a",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015625,
+          "element_type": "table",
+          "section_path": [
+            "2. Password and MFA Requirements"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Password and MFA Requirements\n\nTable:\nAccount Type | Minimum Length | Rotation | MFA Requirement | Lockout Rule\nStandard user | 14 characters | 180 days | Authenticator app or security key | 10 failed attempts\nPrivileged admin | 18 characters | 90 ",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q05",
+      "question": "According to the incident reporting section, how quickly must suspected phishing be reported?",
+      "answerable": true,
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "a15f250b-2f21-4f23-a746-a81a1eaa6bdb"
+      ],
+      "expected_chunk_ranks": {
+        "a15f250b-2f21-4f23-a746-a81a1eaa6bdb": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "Employees must report suspected phishing": 1,
+        "within 1 hour of discovery": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 74.19189997017384,
+        "lexical_retrieval_ms": 350.14489997411147,
+        "vector_retrieval_ms": 409.871399984695,
+        "rrf_ms": 0.1194999786093831,
+        "hybrid_retrieval_ms": 760.1603000075556,
+        "generation_ms": null,
+        "total_ask_ms": 834.4040000229143
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "a15f250b-2f21-4f23-a746-a81a1eaa6bdb",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "7. Incident Reporting"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 7. Incident Reporting\n\nEmployees must report suspected phishing, lost devices, unauthorized access, accidental data sharing, malware alerts, and suspicious authentication prompts to Security Operations within 1 hour of discovery.\n\nIncidents involving ",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "39465363-a065-4953-b6da-03aa8d5e6be5",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "7. Incident Reporting"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 7. Incident Reporting\n\n7. Incident Reporting",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q06",
+      "question": "What approvals and documentation are needed for a travel policy exception?",
+      "answerable": true,
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "5e0fe999-c5f2-40e4-a721-30ea7f97b338"
+      ],
+      "expected_chunk_ranks": {
+        "5e0fe999-c5f2-40e4-a721-30ea7f97b338": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "Policy exceptions must be requested before booking whenever possible": 1,
+        "policy limit, actual expected cost, business reason, and approving leader": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 75.83809999050573,
+        "lexical_retrieval_ms": 332.31199998408556,
+        "vector_retrieval_ms": 512.3934000148438,
+        "rrf_ms": 0.11490000179037452,
+        "hybrid_retrieval_ms": 844.836000003852,
+        "generation_ms": null,
+        "total_ask_ms": 920.7366000046022
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "5e0fe999-c5f2-40e4-a721-30ea7f97b338",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "9. Exceptions"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 9. Exceptions\n\nPolicy exceptions must be requested before booking whenever possible. The request must include the policy limit, actual expected cost, business reason, and approving leader. Finance may audit any exception after reimbursement.\n\nRepeated",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "535ea9ce-0d13-45a7-a971-567a0de6face",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nAll travel must be requested in the Meridian Travel Portal before booking. Domestic trips require manager approval when the estimated trip cost is INR 20,000 or below and director approval above INR 20,000. International trip",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "51c456d7-882f-4dc4-adc0-7e0184188f66",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015873015873015872,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\n2. Travel Approval Rules",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "661f0589-9adb-40f2-a05f-494448927961",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\nInternational flights under six hours must be booked in economy class. Business class may be booked for international flight segments of six hours or more by employees at grade M4 and above. Employees below grade M4 nee",
+          "matches_expected": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "3a3123d9-cd42-4b2d-bc4c-2278821f668d",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015384615384615385,
+          "element_type": "table",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nTable:\nTrip Type | Cost Threshold | Required Approval | Advance Notice\nDomestic | Up to INR 20,000 | Manager | 3 business days\nDomestic | Above INR 20,000 | Director | 5 business days\nInternational | Up to INR 250,000 | Direc",
+          "matches_expected": false
+        },
+        {
+          "rank": 6,
+          "chunk_id": "6c02ac0d-d40e-42a1-9042-cf163d8e809e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015151515151515152,
+          "element_type": "text",
+          "section_path": [
+            "1. Purpose and Scope"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 1. Purpose and Scope\n\nThis Employee Travel and Expense Policy defines how Meridian Retail Group employees request business travel, book transportation, select lodging, claim meals, and submit reimbursable expenses. The policy applies to all full-time ",
+          "matches_expected": false
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6348d33e-19a0-42aa-9c5e-fe0929862fba",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014925373134328358,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\n4. International Travel Policy",
+          "matches_expected": false
+        },
+        {
+          "rank": 8,
+          "chunk_id": "d36da241-527d-40cb-bc9c-0ec8d6e6defe",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014705882352941176,
+          "element_type": "text",
+          "section_path": [
+            "Employee Travel and Expense Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: Employee Travel and Expense Policy\n\nEmployee Travel and Expense Policy",
+          "matches_expected": false
+        },
+        {
+          "rank": 9,
+          "chunk_id": "8adc1ada-9499-46ff-a2a4-13513022e12e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014492753623188406,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\n3. Domestic Travel Policy",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q07",
+      "question": "Compare the normal review schedule for confidential data access with privileged administrator access.",
+      "answerable": true,
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "9a989288-72b2-4709-9767-25bf90dd7f8d"
+      ],
+      "expected_chunk_ranks": {
+        "9a989288-72b2-4709-9767-25bf90dd7f8d": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "System owners review confidential data access every 90 days": 1,
+        "Security reviews privileged administrator access monthly": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 70.65000000875443,
+        "lexical_retrieval_ms": 338.0439000320621,
+        "vector_retrieval_ms": 512.6871999818832,
+        "rrf_ms": 0.13889995170757174,
+        "hybrid_retrieval_ms": 850.8932000258937,
+        "generation_ms": null,
+        "total_ask_ms": 921.5902999858372
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "9a989288-72b2-4709-9767-25bf90dd7f8d",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "8. Access Reviews and Data Classification"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 8. Access Reviews and Data Classification\n\nManagers review standard application access quarterly. System owners review confidential data access every 90 days. Security reviews privileged administrator access monthly and break-glass account usage after",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "f4722edf-8661-4517-9eea-b5eb81e4a40b",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "4. Access Request and Approval Process"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. Access Request and Approval Process\n\nAccess requests must be submitted through the Access Portal with business justification, system name, requested role, data classification, duration, and approving manager. Access to confidential or restricted sy",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "eeab82fe-6516-4ef9-a4ef-b05dd22e0923",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015873015873015872,
+          "element_type": "table",
+          "section_path": [
+            "4. Access Request and Approval Process"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 4. Access Request and Approval Process\n\nTable:\nAccess Category | Approver | Maximum Duration | Review Evidence\nPrivileged administrator | Director + Security | 90 days | Admin access review record\nEmergency break-glass | CISO or delegate | 8 hours | I",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "6e56f366-d137-472c-8657-74db6e5b4ae8",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "5. Role-Based and Privileged Access"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 5. Role-Based and Privileged Access\n\nRole-based access control must grant the minimum permissions necessary for the employee's job function. Shared accounts are prohibited except for approved service accounts managed through the company vault.\n\nPrivil",
+          "matches_expected": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "4bca36b8-2700-4e65-8f2e-c4b8cc3f90f6",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015384615384615385,
+          "element_type": "text",
+          "section_path": [
+            "5. Role-Based and Privileged Access"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 5. Role-Based and Privileged Access\n\n5. Role-Based and Privileged Access",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q08",
+      "question": "Is Redis cache availability relevant to employee travel reimbursement approvals?",
+      "answerable": true,
+      "expected_document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+      "expected_chunk_ids": [
+        "535ea9ce-0d13-45a7-a971-567a0de6face",
+        "a4577cc7-6034-4785-bb2c-ada210359101"
+      ],
+      "expected_chunk_ranks": {
+        "535ea9ce-0d13-45a7-a971-567a0de6face": null,
+        "a4577cc7-6034-4785-bb2c-ada210359101": null
+      },
+      "first_relevant_rank": null,
+      "expected_evidence_ranks": {
+        "All travel must be requested in the Meridian Travel Portal before booking": null,
+        "Approved reimbursements are paid in the next payroll cycle": null
+      },
+      "retrieved_expected_evidence": false,
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0,
+      "precision_at_5": 0.0,
+      "precision_at_10": 0.0,
+      "mrr": 0.0,
+      "source_grounding": {
+        "expected_document_found": false,
+        "expected_evidence_found": false,
+        "grounded": false
+      },
+      "latency_ms": {
+        "query_embedding_ms": 80.37049998529255,
+        "lexical_retrieval_ms": 430.89670001063496,
+        "vector_retrieval_ms": 410.0133999600075,
+        "rrf_ms": 0.0703000114299357,
+        "hybrid_retrieval_ms": 841.0019000293687,
+        "generation_ms": null,
+        "total_ask_ms": 921.4187999605201
+      },
+      "retrieved_top_10": []
+    },
+    {
+      "id": "controlled-v1-q09",
+      "question": "What happens if a company laptop is missing urgent security updates for more than a week?",
+      "answerable": true,
+      "expected_document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+      "expected_chunk_ids": [
+        "70353e8c-5aac-4254-b6d6-1e9bcd63f087"
+      ],
+      "expected_chunk_ranks": {
+        "70353e8c-5aac-4254-b6d6-1e9bcd63f087": 1
+      },
+      "first_relevant_rank": 1,
+      "expected_evidence_ranks": {
+        "Laptops missing critical patches for more than 7 days are blocked from VPN access": 1
+      },
+      "retrieved_expected_evidence": true,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "precision_at_5": 0.2,
+      "precision_at_10": 0.1,
+      "mrr": 1.0,
+      "source_grounding": {
+        "expected_document_found": true,
+        "expected_evidence_found": true,
+        "grounded": true
+      },
+      "latency_ms": {
+        "query_embedding_ms": 79.98699997551739,
+        "lexical_retrieval_ms": 329.54120001522824,
+        "vector_retrieval_ms": 316.2249000160955,
+        "rrf_ms": 0.037299992982298136,
+        "hybrid_retrieval_ms": 645.8161000045948,
+        "generation_ms": null,
+        "total_ask_ms": 725.8491999818943
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "70353e8c-5aac-4254-b6d6-1e9bcd63f087",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "6. Device and Endpoint Security Requirements"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Device and Endpoint Security Requirements\n\nDevices used to access company systems must run supported operating systems, full-disk encryption, endpoint detection and response, automatic screen lock, and current security patches. Laptops missing crit",
+          "matches_expected": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "a15f250b-2f21-4f23-a746-a81a1eaa6bdb",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "7. Incident Reporting"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 7. Incident Reporting\n\nEmployees must report suspected phishing, lost devices, unauthorized access, accidental data sharing, malware alerts, and suspicious authentication prompts to Security Operations within 1 hour of discovery.\n\nIncidents involving ",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "dc2f3a33-ea46-4c75-8d0d-78dd1e644cce",
+          "document_id": "b48e36fb-da1c-4542-b080-d86d11ee5f0a",
+          "score": 0.015873015873015872,
+          "element_type": "table",
+          "section_path": [
+            "6. Device and Endpoint Security Requirements"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Device and Endpoint Security Requirements\n\nTable:\nControl | Required Setting | Compliance Deadline | Escalation\nFull-disk encryption | Enabled on all laptops | Before device assignment | IT manager\nCritical patching | Installed within 7 days | 7 da",
+          "matches_expected": false
+        }
+      ]
+    },
+    {
+      "id": "controlled-v1-q10",
+      "question": "What is the company's approved reimbursement rate for pet boarding during international travel?",
+      "answerable": false,
+      "expected_document_id": null,
+      "expected_chunk_ids": [],
+      "expected_chunk_ranks": {},
+      "first_relevant_rank": null,
+      "expected_evidence_ranks": {},
+      "retrieved_expected_evidence": null,
+      "recall_at_5": null,
+      "recall_at_10": null,
+      "precision_at_5": null,
+      "precision_at_10": null,
+      "mrr": null,
+      "source_grounding": {
+        "expected_document_found": null,
+        "expected_evidence_found": null,
+        "grounded": null
+      },
+      "latency_ms": {
+        "query_embedding_ms": 60.344900004565716,
+        "lexical_retrieval_ms": 236.30629997933283,
+        "vector_retrieval_ms": 306.90100003266707,
+        "rrf_ms": 0.1314000110141933,
+        "hybrid_retrieval_ms": 543.3524000109173,
+        "generation_ms": null,
+        "total_ask_ms": 603.7492000032216
+      },
+      "retrieved_top_10": [
+        {
+          "rank": 1,
+          "chunk_id": "6c02ac0d-d40e-42a1-9042-cf163d8e809e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.01639344262295082,
+          "element_type": "text",
+          "section_path": [
+            "1. Purpose and Scope"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 1. Purpose and Scope\n\nThis Employee Travel and Expense Policy defines how Meridian Retail Group employees request business travel, book transportation, select lodging, claim meals, and submit reimbursable expenses. The policy applies to all full-time ",
+          "matches_expected": false
+        },
+        {
+          "rank": 2,
+          "chunk_id": "535ea9ce-0d13-45a7-a971-567a0de6face",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.016129032258064516,
+          "element_type": "text",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nAll travel must be requested in the Meridian Travel Portal before booking. Domestic trips require manager approval when the estimated trip cost is INR 20,000 or below and director approval above INR 20,000. International trip",
+          "matches_expected": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "661f0589-9adb-40f2-a05f-494448927961",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015873015873015872,
+          "element_type": "text",
+          "section_path": [
+            "4. International Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 4. International Travel Policy\n\nInternational flights under six hours must be booked in economy class. Business class may be booked for international flight segments of six hours or more by employees at grade M4 and above. Employees below grade M4 nee",
+          "matches_expected": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "a4577cc7-6034-4785-bb2c-ada210359101",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015625,
+          "element_type": "text",
+          "section_path": [
+            "8. Expense Submission and Reimbursement"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 8. Expense Submission and Reimbursement\n\nExpense reports must be submitted in the Meridian Expense Portal within 30 calendar days after trip completion. Claims submitted between 31 and 60 days require manager approval and a late-submission reason. Cla",
+          "matches_expected": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "5e0fe999-c5f2-40e4-a721-30ea7f97b338",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015384615384615385,
+          "element_type": "text",
+          "section_path": [
+            "9. Exceptions"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 9. Exceptions\n\nPolicy exceptions must be requested before booking whenever possible. The request must include the policy limit, actual expected cost, business reason, and approving leader. Finance may audit any exception after reimbursement.\n\nRepeated",
+          "matches_expected": false
+        },
+        {
+          "rank": 6,
+          "chunk_id": "3a3123d9-cd42-4b2d-bc4c-2278821f668d",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.015151515151515152,
+          "element_type": "table",
+          "section_path": [
+            "2. Travel Approval Rules"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 2. Travel Approval Rules\n\nTable:\nTrip Type | Cost Threshold | Required Approval | Advance Notice\nDomestic | Up to INR 20,000 | Manager | 3 business days\nDomestic | Above INR 20,000 | Director | 5 business days\nInternational | Up to INR 250,000 | Direc",
+          "matches_expected": false
+        },
+        {
+          "rank": 7,
+          "chunk_id": "d36da241-527d-40cb-bc9c-0ec8d6e6defe",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014925373134328358,
+          "element_type": "text",
+          "section_path": [
+            "Employee Travel and Expense Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: Employee Travel and Expense Policy\n\nEmployee Travel and Expense Policy",
+          "matches_expected": false
+        },
+        {
+          "rank": 8,
+          "chunk_id": "30e9bfa1-747b-4630-8372-20275df9633e",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014705882352941176,
+          "element_type": "text",
+          "section_path": [
+            "6. Meal and Per-Diem Limits"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 6. Meal and Per-Diem Limits\n\nMeal reimbursement is based on actual expenses up to the published cap. Alcohol is not reimbursable unless part of a client entertainment event approved by a director. When breakfast is included in the hotel rate, the brea",
+          "matches_expected": false
+        },
+        {
+          "rank": 9,
+          "chunk_id": "f4f7f509-f1ce-462f-96ee-4638b74c50c8",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014492753623188406,
+          "element_type": "text",
+          "section_path": [
+            "3. Domestic Travel Policy"
+          ],
+          "page_number": 1,
+          "content_preview": "Section: 3. Domestic Travel Policy\n\nEmployees must select economy class for domestic flights under five hours. Premium economy is permitted for domestic routes of five hours or more when the fare difference is less than INR 4,000. Business class is limited to ",
+          "matches_expected": false
+        },
+        {
+          "rank": 10,
+          "chunk_id": "1690ceb4-9fc8-4716-ba95-da8429673e61",
+          "document_id": "2aa42cf5-4b17-4205-8f26-9825eacf97b3",
+          "score": 0.014285714285714285,
+          "element_type": "text",
+          "section_path": [
+            "8. Expense Submission and Reimbursement"
+          ],
+          "page_number": 2,
+          "content_preview": "Section: 8. Expense Submission and Reimbursement\n\n8. Expense Submission and Reimbursement",
+          "matches_expected": false
+        }
+      ]
+    }
+  ]
+}

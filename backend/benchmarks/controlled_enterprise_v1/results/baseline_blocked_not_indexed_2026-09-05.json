@@ -1,0 +1,43 @@
+{
+  "benchmark_id": "controlled_enterprise_v1",
+  "status": "blocked",
+  "blocked_reason": "The two controlled benchmark PDFs were not found in the user-provided Supabase chunks table, so actual chunk-level ground truth could not be established and the baseline evaluation was not run.",
+  "database_verification": {
+    "database_url_checked": "user-provided Supabase PostgreSQL URL, password redacted",
+    "total_chunks": 407,
+    "documents": [
+      {
+        "document_id": "50dfa43e-356f-4807-8153-bd896fd2a9e5",
+        "chunk_count": 161,
+        "detected_content": "Distributed Systems Incident Response Handbook / Northstar"
+      },
+      {
+        "document_id": "6fbf747e-3d33-41af-ab68-30aa4115f26e",
+        "chunk_count": 161,
+        "detected_content": "Distributed Systems Incident Response Handbook / Northstar"
+      },
+      {
+        "document_id": "34000ebd-2089-4bce-a4aa-7150b7cf3cc4",
+        "chunk_count": 85,
+        "detected_content": "Older Meridian Systems Information Security Policy"
+      }
+    ],
+    "controlled_benchmark_signature_hits": {
+      "Employee Travel": 0,
+      "Travel & Expense": 0,
+      "Expense Policy": 0,
+      "hotel limit": 0,
+      "per-diem": 0,
+      "Access Management Policy": 0,
+      "Meridian Travel Portal": 0,
+      "Expense Portal": 0,
+      "INR 8,500": 0,
+      "confidential data access": 0,
+      "critical patches": 0,
+      "pet boarding": 0
+    }
+  },
+  "dataset_updated": false,
+  "evaluation_run": false,
+  "required_next_action": "Upload/index backend/benchmarks/controlled_enterprise_v1/employee_travel_expense_policy.pdf and backend/benchmarks/controlled_enterprise_v1/information_security_access_management_policy.pdf into the user-provided Supabase environment, then rerun the chunk ID mapping and baseline evaluation."
+}

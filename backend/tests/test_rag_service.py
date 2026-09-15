@@ -7,7 +7,7 @@ from app.embeddings.local import DeterministicTestEmbeddingProvider
 from app.indexing.lexical import LexicalIndexer
 from app.indexing.models import build_chunks_table
 from app.indexing.vector import VectorIndexer
-from app.rag.llm import LLMConfig, LLMProvider
+from app.rag.llm import LLMConfig, LLMProvider, LLMServiceUnavailableError
 from app.rag.prompt import SYSTEM_INSTRUCTION
 from app.retrieval.hybrid import HybridSearchService
 from app.retrieval.lexical import LexicalRetriever
@@ -15,6 +15,7 @@ from app.retrieval.models import RetrievalResult
 from app.retrieval.vector import VectorRetriever
 from app.services.rag_service import (
     GenerationFailedError,
+    GenerationTemporarilyUnavailableError,
     InvalidQuestionError,
     RAGAnswer,
     RAGError,
@@ -239,6 +240,16 @@ class TestGenerationFailure(unittest.TestCase):
         service = RAGService(retrieval, llm)
         with self.assertRaises(RuntimeError):
             service.answer("some question")
+
+    def test_temporary_llm_unavailability_is_classified_separately(self):
+        retrieval = FakeRetrievalService()
+        llm = FakeLLMProvider(error=LLMServiceUnavailableError("upstream busy"))
+        service = RAGService(retrieval, llm)
+
+        with self.assertRaises(GenerationTemporarilyUnavailableError) as ctx:
+            service.answer("some question")
+
+        self.assertIsInstance(ctx.exception, GenerationFailedError)
 
 
 # ---------------------------------------------------------------------------
